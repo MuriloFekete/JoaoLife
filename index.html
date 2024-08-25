@@ -15,20 +15,48 @@
 
 <h1>Ele trocou a namorada pelo Pentakill!</h1>
 <p>Clique no botão para ouvir a música.</p>
-<button class="button" onclick="playMusic()">Play</button>
 
-<audio id="musicPlayer" class="hidden">
-    <source src="music/joao.ogg" type="audio/mpeg">
-    Seu navegador não suporta o elemento de áudio.
-</audio>
+<video id="video" width="500px" height="300px" controls poster="img/joao-favicon.ico" autoplay loop>
+    <source src="midia/joao_video.mp4" type="video/mp4">
+    <p>Seu navegador não tem compatibilidade com reprodução de vídeos.</p>
+</video>
+
+<footer>
+    <audio id="audio" autoplay="autoplay" controls="controls" loop>
+    <source src="midia/joao.ogg" type="audio/mp3"/>
+    seu navegador não suporta a musica
+    </audio>
+</footer>
 
 <script>
-    function playMusic() {
-        var player = document.getElementById('musicPlayer');
-        player.play();
-        document.querySelector('.button').textContent = "Tocando...";
-        document.querySelector('.button').disabled = true;
+   
+    var video = document.getElementById('video');
+    var audio = document.getElementById('audio');
+
+    // Função para sincronizar o áudio com o vídeo
+    function syncPlayback() {
+        if (video.paused) {
+            video.play();
+            audio.play();
+        } else {
+            video.pause();
+            audio.pause();
+        }
     }
+
+    // Adiciona eventos para quando o vídeo ou o áudio forem tocados
+    video.addEventListener('play', function() {
+        if (audio.paused) {
+            audio.play();
+        }
+    });
+
+    audio.addEventListener('play', function() {
+        if (video.paused) {
+            video.play();
+        }
+    });
+  
 </script>
 
 </body>
